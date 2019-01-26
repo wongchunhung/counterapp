@@ -1,0 +1,8 @@
+pipeline:
+  docker:
+    image: plugins/docker
+    repo: chunha/pythonapp
+    username: chunha
+    password: p@55W0rd
+    tags:
+      - latest
