@@ -1,6 +1,6 @@
 node {
   stage "Git pull"
-    git url: 'https://github.com/wongchunhung/pythonapp.git'
+    git url: 'https://github.com/wongchunhung/counterapp.git'
     sh 'git checkout test'
     sh 'git clean -f'
     sh 'git reset'
@@ -8,7 +8,7 @@ node {
     sh 'git pull'
 
   stage "Docker Build"
-    sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
+    sh 'docker build -t chunha/counterapp:0.1.${BUILD_NUMBER} .'
 
   stage "Git clean"
     sh 'git clean -f'
@@ -22,10 +22,10 @@ node {
   stage "Image Push"
     withCredentials([usernamePassword(credentialsId: 'harbor', passwordVariable: 'harborPassword', usernameVariable: 'harborUser')]) {
       sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8s-1.local"
-      sh 'docker tag chunha/pythonapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
-      sh 'docker push ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
+      sh 'docker tag chunha/counterapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
+      sh 'docker push ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
     }
 
   stage "Deployment"
-    build job: 'pythonapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
+    build job: 'counterapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }

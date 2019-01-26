@@ -1,7 +1,7 @@
 pipeline:
   docker:
     image: plugins/docker
-    repo: chunha/pythonapp
+    repo: chunha/counterapp
     username: chunha
     password: p@55W0rd
     tags:
