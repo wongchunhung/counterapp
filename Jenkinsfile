@@ -29,6 +29,6 @@ node {
 //      sh 'docker push ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
     }
 
-  //stage "Deployment"
-  //  build job: 'counterapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
+  stage "Deployment"
+    build job: 'counterapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }
