@@ -21,9 +21,12 @@ node {
 
   stage "Image Push"
     withCredentials([usernamePassword(credentialsId: 'harbor', passwordVariable: 'harborPassword', usernameVariable: 'harborUser')]) {
-      sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8s-1.local"
-      sh 'docker tag chunha/counterapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
-      sh 'docker push ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
+      sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8shome1.local"
+//      sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8s-1.local"
+      sh 'docker tag chunha/counterapp:0.1.${BUILD_NUMBER} ingress.k8shome1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
+      sh 'docker push ingress.k8shome1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
+//      sh 'docker tag chunha/counterapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
+//      sh 'docker push ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
     }
 
   //stage "Deployment"
