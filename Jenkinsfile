@@ -5,7 +5,7 @@ node {
     //sh 'git clean -f'
     //sh 'git reset'
     //sh 'git stash'
-    sh 'git pull'
+    sh 'git pull origin master'
 
   stage "Docker Build"
     sh 'docker build -t chunha/counterapp:0.1.${BUILD_NUMBER} .'
