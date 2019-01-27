@@ -1,10 +1,10 @@
 node {
   stage "Git pull"
     git url: 'https://github.com/wongchunhung/counterapp.git'
-    sh 'git checkout test'
-    sh 'git clean -f'
-    sh 'git reset'
-    sh 'git stash'
+    //sh 'git checkout test'
+    //sh 'git clean -f'
+    //sh 'git reset'
+    //sh 'git stash'
     sh 'git pull'
 
   stage "Docker Build"
@@ -26,6 +26,6 @@ node {
       sh 'docker push ingress.k8s-1.local/chunha/counterapp:0.1.${BUILD_NUMBER}'
     }
 
-  stage "Deployment"
-    build job: 'counterapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
+  //stage "Deployment"
+  //  build job: 'counterapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }
